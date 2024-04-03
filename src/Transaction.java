@@ -3,17 +3,44 @@ import java.util.Date;
 
 public class Transaction {
 
-    Date date;
+    private Date date;
 
-    char transaction;
+    private char transaction;
 
-    double amount;
+    private double amount;
+
+    static int totalTransaction=0;
+
+    public Date getDate() {
+        return date;
+    }
+
+    public char getTransaction() {
+        return transaction;
+    }
+
+    public void setTransaction(char transaction) {
+        if (transaction=='d' || transaction=='w')
+            this.transaction = transaction;
+        else{
+        System.err.println("Erro, valores aceitos em transaction: w/d");;
+        System.exit(1);
+        }
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
 
     public Transaction(char transaction, double amount) {
-        this.transaction = transaction;
+        setTransaction(transaction);
         this.amount = amount;
         this.date = new Date();
-
+        totalTransaction++;
     }
 
     void statemant(){

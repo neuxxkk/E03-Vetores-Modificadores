@@ -1,27 +1,66 @@
 public class Account {
-    Client owner;
+    private Client owner;
 
-    double balance;
+    private double balance;
 
-    int id;
+    private int id;
 
-    String agency;
+    private String agency;
 
-    double limit;
+    private double limit;
 
-    Transaction[] transaction;
+    private Transaction[] transaction;
 
-    int transactionCounter;
+    private int transactionCounter;
+
+    static int totalAccount=0;
+
+    public Client getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Client owner) {
+        this.owner = owner;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getAgency() {
+        return agency;
+    }
+
+    public void setAgency(String agency) {
+        this.agency = agency;
+    }
+
+    public double getLimit() {
+        return limit;
+    }
+
+    public void setLimit(double limit) {
+        this.limit = (limit<0) ? 0 : limit;
+    }
 
     //Constructor
-    public Account(Client owner, double balance, int id, String agency){
+    public Account(Client owner, double balance, int id, String agency, double limit){
         this.owner = owner;
         this.balance = balance;
         this.id = id;
         this.agency = agency;
-        this.limit = balance*10;
+        setLimit(limit);
         this.transaction = new Transaction[1000];
         this.transactionCounter=0;
+        totalAccount++;
     }
 
     //Alter functions 
@@ -47,7 +86,7 @@ public class Account {
     }
 
     boolean transfer(Account destinyAccount, double amount){
-        if(this.withdraw(amount)){
+        if(withdraw(amount)){
             return destinyAccount.deposit(amount);
         }else {
             return false;
@@ -62,9 +101,11 @@ public class Account {
     }
 
     void printStatemant() {
+        System.out.printf("\n--Account %d Statemant--", id);
         for (int i = 0; i < transactionCounter; i++) {
                 transaction[i].statemant();
         }
+        System.out.println();
     }
     
 
