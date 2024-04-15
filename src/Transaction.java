@@ -7,7 +7,7 @@ public class Transaction {
 
     private char transaction;
 
-    private double amount;
+    private double amoung;
 
     static int totalTransaction=0;
 
